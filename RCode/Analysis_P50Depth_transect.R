@@ -4,10 +4,6 @@
 #getwd() #shows the current working directory for the R gui.  
 
 require(ncdf)
-#require(fields)
-#require(RColorBrewer)
-#require(colorRamps)
-#require(caTools)
 
 source('filled.contour/filled.contour.R', chdir = TRUE)
 source('filled.contour/filled.legend.R', chdir = TRUE)
@@ -90,35 +86,13 @@ z.temp<-z.temp[,ncol(z.temp):1]
 #z.temp.10m<-z.temp[,2]
 #print(z.temp.10m[which(names(z.temp.10m)=="20.5")]-z.temp.10m[which(names(z.temp.10m)=="40.5")])
 
-
-
-
-
-
-
-
-
 #-----------------------
 #    P50 Depth
 #-----------------------
-folder<-paste("../Results/P50Depth/")
+folder<-paste("../Results/P50Depth_ABC/")
 filenames<-list.files(path=folder, pattern=NULL, full.names=FALSE, recursive=FALSE)
-filenames<-filenames[-4]
-
 p50vals <- c()
 deltaHvals <- c()
-#collist <- c()
-#m<-8
-
-#colornums<-colorRampPalette(brewer.pal(9,"Greys"))(10)
-#colornums<-colornums[length(colornums):1]
-
-#colornums<-brewer.pal(6,"Set1")
-#colornums<-colornums[length(colornums):1]
-#colornums<-colornums[c(1,3,5,7,9,11)]
-
-#collist<-c("black", "green4", "blue", "red")
-#ltylist<-c(3,1,1,1)
 
 for(i in 1:length(filenames)){
 
@@ -144,13 +118,28 @@ deltaH<-gsub("_", "", deltaH)
 
 deltaHvals<-c(deltaHvals, deltaH)
 
-#if(i==1){data.60.umolkg<-z[which(rownames(z)==trans.lon),]}
-if(i==2){data.p50.2.H.m40<-z[which(rownames(z)==trans.lon),]}
-if(i==3){data.p50.2.H.20<-z[which(rownames(z)==trans.lon),]}
-if(i==4){data.p50.8.H.m40<-z[which(rownames(z)==trans.lon),]}
+if(i==1){data.p50.2.H.m40<-z[which(rownames(z)==trans.lon),]}
+if(i==2){data.p50.2.H.20<-z[which(rownames(z)==trans.lon),]}
+if(i==3){data.p50.8.H.m40<-z[which(rownames(z)==trans.lon),]}
 
 close.ncdf(nc)
 }
+
+#-----------------------
+#    60umol/kg Depth
+#-----------------------
+folder2<-paste("../Results/60umolkg_Depth/")
+filename2<-list.files(path=folder2, pattern=NULL, full.names=FALSE, recursive=FALSE)
+nc<-open.ncdf(paste(folder2, filename2[1], sep=""))
+dims<-nc$var[[1]]$ndim
+lats<-nc$dim$LATITUDE$vals
+lats<-sort(lats)
+lons<-nc$dim$LONGITUDE$vals
+z<-get.var.ncdf(nc, nc$var[[1]], start=c(1,1,1), count=c(length(lons),length(lats),1))
+rownames(z)<-lons
+colnames(z)<-lats
+data.60.umolkg<-z[which(rownames(z)==trans.lon),]
+close.ncdf(nc)
 
 #------------------------------
 #      Create Plot
@@ -160,8 +149,7 @@ OutGraph<-paste("../Graphs/TransectComparison.ps")
 postscript(OutGraph, family="Helvetica", width=3, height=7, pointsize=12)
 
 #quartz(h=7, w=3)
-par(new = "TRUE",              
-    plt = c(0.15,0.75,0.70,0.95),   
+par(plt = c(0.15,0.75,0.70,0.95),   
     las = 1,                      # orientation of axis labels
     cex.axis = 1,                 # size of axis annotation
     tck = -0.04,
@@ -175,17 +163,9 @@ lines(names(data.p50.2.H.20), data.p50.2.H.20*-1, col="blue", lty=1, lwd=2.5)
 lines(names(data.p50.8.H.m40), data.p50.8.H.m40*-1, col="red", lty=1, lwd=2.5) 
 axis(side=1, labels=FALSE)
 axis(side=2, labels=TRUE, las=2)
-
 text(55,-190,"C",col="red")
 text(55,-450,"B",col="blue")
 text(55,-620,"A",col="green4")
-
-#legendvals<-as.data.frame(cbind(p50vals, deltaHvals, collist), stringsAsFactors=FALSE)
-#colnames(legendvals)<-c("p50", "deltaH", "colors")
-#legendvals[1,1:2]<-c(NA, NA)
-#legendvals$type<-c("60 umol kg", "type A", "type B", "type C")
-#legend(-8, -700, c(legendvals$type), seg.len=0.80, lty=ltylist, ncol=1, lwd=2.5, cex=1, xjust=0, col=c(legendvals$colors), y.intersp=0.9, x.intersp=0.8)
-#mtext("Depth (m)", side=2, line=1, cex=1.0, outer=TRUE)
 
 par(new = "TRUE",              
     plt = c(0.15,0.75,0.40,0.65),                                    
@@ -204,8 +184,6 @@ lines(names(data.p50.2.H.m40), data.p50.2.H.m40*-1, col="white", lty=1, lwd=2.5)
 lines(names(data.p50.2.H.20), data.p50.2.H.20*-1, col="white", lty=1, lwd=2.5) 
 lines(names(data.p50.8.H.m40), data.p50.8.H.m40*-1, col="white", lty=1, lwd=2.5) 
 
-#color.palette = colorRampPalette(c("lightblue","blue","darkgreen","yellowgreen","lightyellow"))
-
 par(new = "TRUE",
     plt = c(0.8,0.85,0.40,0.65),   # define plot region for legend
     las = 1,
@@ -214,7 +192,6 @@ par(new = "TRUE",
 
 filled.legend(lats.po2,depths.po2,z.po2, xlim=c(-10,60), ylim=c(-1000,0), zlim=c(0, 25), color.palette=colorRampPalette(c("grey20","grey","darkgreen","yellowgreen","lightyellow")))
 filled.legend(lats.po2,depths.po2,z.po2, xlim=c(-10,60), ylim=c(-1000,0), zlim=c(0, 25), color.palette=colorRampPalette(c("grey20","grey","darkgreen","yellowgreen","lightyellow")))
-
 
 par(new = "TRUE",              
     plt = c(0.15,0.75,0.10,0.35),                                    
@@ -236,8 +213,6 @@ par(new = "TRUE",
 
 filled.legend(lats.temp,depths.temp,z.temp,xlim=c(-10,60), ylim=c(-1000,0), zlim=c(0,30), color.palette = colorRampPalette(c("lightblue", "navy", "purple", "red","orange","lightyellow")))
 filled.legend(lats.temp,depths.temp,z.temp,xlim=c(-10,60), ylim=c(-1000,0), zlim=c(0,30), color.palette = colorRampPalette(c("lightblue", "navy", "purple", "red","orange","lightyellow")))
-
-#mtext("Latitude", side=1, line=0, cex=1.0, outer=TRUE)
 
 dev.off()
 
