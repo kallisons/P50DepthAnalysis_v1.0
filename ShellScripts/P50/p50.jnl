@@ -1,0 +1,10 @@
+SET DATA "../../EnvironmentalData/Bianchi_po2_annual_1deg.nc", "../../EnvironmentalData/temperature_annual_1deg.nc"
+Let p50_critter = 8.0
+Let deltaH_critter = 20
+Let R =  0.008314
+Let tempK = t_an[d=2] + 273.15
+Let tempK_ml = t_an[d=2, k=2]+ 273.15
+Let tempshift_p50 = (deltaH_critter*((1/tempK)-(1/tempK_ml))/(2.303*R))
+Let p50 = 10^(log(p50_critter) + tempshift_p50)
+SAVE/CLOBBER/FILE="../../Results/P50/P50_8.0_deltaH_20.nc" p50
+quit

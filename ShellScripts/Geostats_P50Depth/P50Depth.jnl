@@ -1,0 +1,15 @@
+SET DATA "../../EnvironmentalData/Bianchi_po2_annual_1deg.nc", "../../EnvironmentalData/temperature_annual_1deg.nc"
+Let p50_critter = 10
+Let deltaH_critter = 140
+Let R =  0.008314
+Let tempK = t_an[d=2] + 273.15
+Let tempK_ml = t_an[d=2, k=2]+ 273.15
+Let tempshift_p50 = (deltaH_critter*((1/tempK)-(1/tempK_ml))/(2.303*R))
+Let p50 = 10^(log(p50_critter) + tempshift_p50)
+Define grid/like=po2[d=1] gcommon
+Let p50_diff = po2[d=1]-p50[g=gcommon]
+Let p50_diffequal0 = p50_diff[z=@loc:0]
+Let ocean = t_an[d=2]*0+1
+Let p50_area = p50_diffequal0*0+1
+list/clobber/nohead/file="../../Results/Geostats_P50Depth/P50Depth_geostats.txt"/format=tab/append p50_critter, deltaH_critter, ocean[x=@din, y=@din, k=1], p50_area[x=@din, y=@din], p50_diffequal0[x=@min, y=@min], p50_diffequal0[x=@max, y=@max]
+quit
