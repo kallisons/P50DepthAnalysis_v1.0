@@ -1,7 +1,0 @@
-set data "../../EnvironmentalData/woce_monthly_linear_ann_ave.nc", "../../EnvironmentalData/salinity_annual_1deg.nc", "../../EnvironmentalData/temperature_annual_1deg.nc"
-let o2_an3 = (o2_ann_no_time[d=1]/dens)*1000
-let mask60 = o2_an3*0+60
-let hypconc1 = o2_an3-mask60
-let depth_60umolkg = hypconc1[z=@loc:0]
-SAVE/CLOBBER/FILE="../../Results/60umolkg_Depth/Hypoxia60_Conc_Depth.nc" depth_60umolkg
-quit
