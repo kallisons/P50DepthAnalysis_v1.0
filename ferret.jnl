@@ -1,11 +1,11 @@
  ! NOAA/PMEL TMAP
  ! FERRET v6.82  
  ! Darwin 9.8.0 - 08/06/12
- !  8-Oct-15 17:07     
+ !  8-Oct-15 17:08     
 
 SET DATA "EnvironmentalData/Bianchi_po2_annual_1deg.nc", "EnvironmentalData/temperature_annual_1deg.nc"
-Let p50_critter = 1.4
-Let deltaH_critter = -75
+Let p50_critter = 2.2
+Let deltaH_critter = -110
 Let R =  0.008314
 Let tempK = t_an[d=2] + 273.15
 Let tempK_ml = t_an[d=2, k=2]+ 273.15
@@ -16,6 +16,6 @@ Let p50_diff = po2[d=1]-p50[g=gcommon]
 Let P50Depth = p50_diff[z=@loc:0]
 define att P50Depth.p50 = "kPa"
 define att P50Depth.units = "m"
-define att P50Depth.p50_10m_depth = "1.4 kPa"
-define att P50Depth.deltaH = "-75 kJ mol^-1"
-SAVE/CLOBBER/FILE="Results/P50Depth/P50Depth_P50_1.4_deltaH_-75.nc" P50Depth
+define att P50Depth.p50_10m_depth = "2.2 kPa"
+define att P50Depth.deltaH = "-110 kJ mol^-1"
+SAVE/CLOBBER/FILE="Results/P50Depth/P50Depth_P50_2.2_deltaH_-110.nc" P50Depth
