@@ -16,10 +16,10 @@ Mislan, K. A. S., J. P. Dunne, and J. L. Sarmiento. (in press)  The fundamental 
 NOAA Ferret v6.82:[http://www.ferret.noaa.gov/Ferret/](http://www.ferret.noaa.gov/Ferret/)
 
 Python v2.7.6: [https://www.python.org/](https://www.python.org/)  
-Python packages:
+Python packages: scipy 0.14.0, basemap 1.0.7, numpy 1.9.2, netCDF4 1.1.8, matplotlib 1.4.3
 
 R v3.2.2: [http://www.r-project.org/](http://www.r-project.org/)  
-R packages:
+R packages: ncdf 1.6.8, colorRamps 2.3, fields 8.2-1, caTools 1.17.1
 
 **Operating system information:**
 
@@ -72,7 +72,7 @@ Command to run shell script (takes some time to run and produces 1.5 GB of resul
 -----------------------------
 #### Verifying the results
 -----------------------------
-Compare results generated using the commands above to a set of test files to make sure the results are the same. P50Depth.sh produces 1.5 GB of results so a set of test files is not included.  The analysis in P50Depth.sh is the same as the P50Depth_ABC.sh - the difference is that P50Depth.sh produces results for a wider range of P50 and &Delta;H parameters.
+Compare results generated using the commands above to a set of test files to make sure the results are the same. P50Depth.sh produces 1.5 GB of results so a set of test files is not included.  The analysis in P50Depth.sh is the same as the P50Depth_ABC.sh - the difference is that P50Depth.sh produces results for a wider range of P50 and &Delta;H parameters.  The commands assume that the current directory is the P50DepthAnalysis_v1.0 folder.
 
 Commands to run comparison tests:
 
@@ -85,6 +85,7 @@ Commands to run comparison tests:
 -----------------------------
 #### Graphing the results
 -----------------------------
+Graphs of P<sub>50</sub> are produced and saved in the Graphs folder using commands.  The commands assume that the current directory is the P50DepthAnalysis_v1.0 folder.
 
 Commands to graph the results:
 
@@ -92,7 +93,7 @@ Commands to graph the results:
     Rscript RCode/Analysis_P50Depth_transect.R
     python PythonCode/P50Depth_ABC_Maps.py
     python PythonCode/P50Depth_ABC_Differences_Maps.py
-    Rscript Analysis_P50Depth_parameters.R
+    Rscript RCode/Analysis_P50Depth_parameters.R
 
 -----------------------------
 #### Acknowledgements

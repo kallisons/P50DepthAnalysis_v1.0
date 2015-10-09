@@ -1,13 +1,13 @@
-#Change working directory to P50DepthAnalysis_v1.0/RCode using the setwd() command or using the Misc menu.  
-#getwd() #shows the current working directory for the R gui.  
+#Change working directory to P50DepthAnalysis_v1.0/RCode using the setwd() command or using the Misc menu.
+#getwd() #shows the current working directory for the R gui.
 
 require(ncdf)
 require(colorRamps)
 
 source('RCode/filled.contour/Filled.contour.R', chdir = TRUE)
-source('RCode/filled.contour/Filled.legend.R', chdir = TRUE) 
+source('RCode/filled.contour/Filled.legend.R', chdir = TRUE)
 
-data<-read.table("p50_deltaH_data.txt", header=TRUE, sep="\t", stringsAsFactors=FALSE)
+data<-read.table("RCode/p50_deltaH_data.txt", header=TRUE, sep="\t", stringsAsFactors=FALSE)
 data<-subset(data, data$Habitat=="pelagic")
 data.hb<-subset(data, data$Protein=="hb")
 data.hc<-subset(data, data$Protein=="hc")
@@ -70,7 +70,7 @@ med.table[i,j]<-div2$med
 data1<-read.table("Results/Geostats_P50Depth/P50Depth_geostats.txt")
 
 data1<-data1[,4:9]
-colnames(data1)<-c("p50", "deltaH", "ocean_area", "p50_area", "min_p50depth", "max_p50depth") 
+colnames(data1)<-c("p50", "deltaH", "ocean_area", "p50_area", "min_p50depth", "max_p50depth")
 
 data1$areafrac<-(data1$p50_area/data1$ocean_area)*100
 
@@ -106,11 +106,11 @@ max_p50depth.table[i,j]<-div2$max_p50depth
 
 OutGraph<-paste("Graphs/P50Depth_Parameters_area.ps", sep="")
 postscript(OutGraph, family="Helvetica", width=4, height=4, pointsize=12)
-par(plt = c(0.15,0.75,0.25,0.85),   
+par(plt = c(0.15,0.75,0.25,0.85),
     las = 1,                      # orientation of axis labels
     cex.axis = 1,                 # size of axis annotation
     tck = -0.04,
-    pty="s") 
+    pty="s")
 ls.col<-grey.colors(18, start=0.9, end=0.1, gamma=2.2)
 filled.contour3(p50vals, deltaHvals, areafrac.table, col=ls.col, xlim=c(0,10), ylim=c(-140,140), zlim=c(0,90), ylab="delta H (kJ mol^-1)", xlab="p50 (kPa)", axes=FALSE)
 axis(side=1, at=seq(0,10,2), labels=seq(0,10,2))
@@ -129,11 +129,11 @@ OutGraph<-paste("Graphs/P50Depth_Parameters_min_med_iqr.ps", sep="")
 postscript(OutGraph, family="Helvetica", width=3, height=7, pointsize=12)
 
 plot.new()
-par(new = "TRUE",              
-    plt = c(0.18,0.78,0.70,0.95),   
+par(new = "TRUE",
+    plt = c(0.18,0.78,0.70,0.95),
     las = 1,                      # orientation of axis labels
     cex.axis = 1,                 # size of axis annotation
-    tck = -0.04) 
+    tck = -0.04)
 ls.col<-matlab.like2(16)
 ls.col<-ls.col[length(ls.col):1]
 filled.contour3(p50vals, deltaHvals, min_p50depth.table, col=ls.col, levels=c(seq(0,150,10),400), xlim=c(0,10), ylim=c(-140,140), zlim=c(0,500), ylab="delta H (kJ mol^-1)", axes=FALSE)
@@ -155,11 +155,11 @@ par(new = "TRUE",
 filled.legend(p50vals, deltaHvals, min_p50depth.table, col=ls.col, levels=seq(0,150,10), xlim=c(0,10), ylim=c(-140,140), zlim=c(0,150))
 filled.legend(p50vals, deltaHvals, min_p50depth.table, col=ls.col, levels=seq(0,150,10), xlim=c(0,10), ylim=c(-140,140), zlim=c(0,150))
 
-par(new = "TRUE",              
-    plt = c(0.18,0.78,0.40,0.65),                                    
-    las = 1,                      
+par(new = "TRUE",
+    plt = c(0.18,0.78,0.40,0.65),
+    las = 1,
     cex.axis = 1,                 # size of axis annotation
-    tck = -0.04)    
+    tck = -0.04)
 ls.col<-matlab.like2(25)
 ls.col<-ls.col[length(ls.col):1]
 filled.contour3(p50vals, deltaHvals, med.table, col=ls.col, xlim=c(0,10), ylim=c(-140,140), levels=seq(100,700,25), ylab="delta H (kJ mol^-1)", axes=FALSE)
@@ -182,11 +182,11 @@ par(new = "TRUE",
 filled.legend(p50vals, deltaHvals, med.table, col=ls.col, levels=seq(100,700,25), xlim=c(0,10), ylim=c(-80,40))
 filled.legend(p50vals, deltaHvals, med.table, col=ls.col, levels=seq(100,700,25), xlim=c(0,10), ylim=c(-80,40))
 
-par(new = "TRUE",              
-    plt = c(0.18,0.78,0.10,0.35),                                    
-    las = 1,                      
+par(new = "TRUE",
+    plt = c(0.18,0.78,0.10,0.35),
+    las = 1,
     cex.axis = 1,                 # size of axis annotation
-    tck = -0.04)   
+    tck = -0.04)
 filled.contour3(p50vals, deltaHvals, iqr.table, color.palette = colorRampPalette(c("yellow", "white", "black")), xlim=c(0,10), ylim=c(-140,140), ylab="delta H (kJ mol^-1)", xlab="", axes=FALSE)
 axis(side=1, at=seq(0,10,2), labels=seq(0,10,2))
 axis(side=2, at=seq(-140,140,20), labels=seq(-140,140,20))
