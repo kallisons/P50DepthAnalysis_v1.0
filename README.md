@@ -4,8 +4,10 @@ Blood-oxygen binding for species living in the pelagic ocean
 * explain P<sub>50</sub> and &Delta;H
 * assumes acclimation to temperatures at 10 m depth in the mixed layer.
 
-Please cite the following paper if you use this code:  
-Mislan, K. A. S., J. P. Dunne, and J. L. Sarmiento. (in press)  The fundamental niche of blood-oxygen binding in the pelagic ocean. [doi](http://dx.doi.org/10.1111/oik.02650)  
+
+**Please cite the following paper if you use this code:**
+
+Mislan, K. A. S., J. P. Dunne, and J. L. Sarmiento. (in press)  The fundamental niche of blood-oxygen binding in the pelagic ocean. Oikos. [doi](http://dx.doi.org/10.1111/oik.02650)  
 
 
 ---------------------------
@@ -52,7 +54,7 @@ The data in NetCDF format was obtained from the [NOAA National Centers for Envir
 -------------------------------
 #### Running the analysis code
 -------------------------------
-The analysis to calculate P<sub>50</sub> depth is run in NOAA Ferret using shell scripts in the ShellScripts folder. P<sub>50</sub> at 10 m depth and &Delta;H values to be analyzed can be added or changed at the top of the P50Depth_ABC.sh, P50Depth.sh, and P50Depth_geostats.sh files.  The output from the shell scripts will be put in the Results folder.  The commands assume that the current directory is the P50DepthAnalysis_v1.0 folder.  P50Depth.sh produces 1.5 GB of results.  
+The analysis to calculate P<sub>50</sub> depth is run in NOAA Ferret using shell scripts in the ShellScripts folder. P<sub>50</sub> at 10 m depth and &Delta;H values to be analyzed can be added or changed at the top of the P50Depth_ABC.sh, P50Depth.sh, and P50Depth_geostats.sh files.  The output from the shell scripts will be put in the Results folder.  The commands assume that the current directory is the P50DepthAnalysis_v1.0 folder.  
 
 Commands to run shell scripts:  
 
@@ -85,7 +87,7 @@ Commands to run comparison tests:
 -----------------------------
 #### Graphing the results
 -----------------------------
-Graphs of P<sub>50</sub> are produced and saved in the Graphs folder using commands.  The commands assume that the current directory is the P50DepthAnalysis_v1.0 folder.
+Plots of P<sub>50</sub> and P<sub>50</sub> depth are produced and saved in the Graphs folder.  The commands assume that the current directory is the P50DepthAnalysis_v1.0 folder.
 
 Commands to graph the results:
 
