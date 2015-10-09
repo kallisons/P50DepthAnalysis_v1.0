@@ -16,8 +16,8 @@ decimalplaces <- function(x) {
 
 TableCompare <- function(filename.new, filename.old) {
 
-	filename.new<-paste("../Results/P50/P50_2.0_deltaH_-40.nc")
-	filename.old<-paste("../TestFiles/P50/P50_2.0_deltaH_-40.nc")
+	filename.new<-paste("Results/P50/P50_2.0_deltaH_-40.nc")
+	filename.old<-paste("TestFiles/P50/P50_2.0_deltaH_-40.nc")
 
 	new.nc <- open.ncdf(filename.new)
 	old.nc <- open.ncdf(filename.old)
@@ -120,8 +120,8 @@ close.ncdf(old.nc)
 
 }
 
-TableCompare("../Results/P50/P50_2.0_deltaH_-40.nc", "../TestFiles/P50/P50_2.0_deltaH_-40.nc")
-TableCompare("../Results/P50/P50_2.0_deltaH_20.nc", "../TestFiles/P50/P50_2.0_deltaH_20.nc")
-TableCompare("../Results/P50/P50_8.0_deltaH_-40.nc", "../TestFiles/P50/P50_8.0_deltaH_-40.nc")
-TableCompare("../Results/P50/P50_8.0_deltaH_20.nc", "../TestFiles/P50/P50_8.0_deltaH_20.nc")
+TableCompare("Results/P50/P50_2.0_deltaH_-40.nc", "TestFiles/P50/P50_2.0_deltaH_-40.nc")
+TableCompare("Results/P50/P50_2.0_deltaH_20.nc", "TestFiles/P50/P50_2.0_deltaH_20.nc")
+TableCompare("Results/P50/P50_8.0_deltaH_-40.nc", "TestFiles/P50/P50_8.0_deltaH_-40.nc")
+TableCompare("Results/P50/P50_8.0_deltaH_20.nc", "TestFiles/P50/P50_8.0_deltaH_20.nc")
 

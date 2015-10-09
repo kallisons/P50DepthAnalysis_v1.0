@@ -13,7 +13,7 @@ trans.lon<-220.5
 #------------------------------
 
 #Filepath for the oxygen data
-pO2_filepath<-paste("../EnvironmentalData/Bianchi_po2_annual_1deg.nc")
+pO2_filepath<-paste("EnvironmentalData/Bianchi_po2_annual_1deg.nc")
 
 #Read in oxygen data
 nc.po2<-open.ncdf(pO2_filepath)
@@ -35,7 +35,7 @@ z.po2.10<-z.po2[which(rownames(z.po2)==9.5),]
 z.po2.55<-z.po2[which(rownames(z.po2)==54.5),]
 
 #Filepath for the temperature data
-Temp_filepath<-paste("../EnvironmentalData/temperature_annual_1deg.nc")
+Temp_filepath<-paste("EnvironmentalData/temperature_annual_1deg.nc")
 
 #Read in temperature data
 nc.temp<-open.ncdf(Temp_filepath)
@@ -81,7 +81,7 @@ z.55$Depth<-as.numeric(z.55$Depth)*-1
 #-----------------------
 #        P50
 #-----------------------
-folder<-paste("../Results/P50/")
+folder<-paste("Results/P50/")
 filenames<-list.files(path=folder, pattern=NULL, full.names=FALSE, recursive=FALSE)
 
 p50vals <- c()
@@ -165,7 +165,7 @@ merge55.p50.8.H.m40$Above[11]<-merge55.p50.8.H.m40$Below[11] #P50 Depth is 250 m
 #      Create Plot
 #------------------------------
 
-OutGraph<-"../Graphs/PointComparison.ps"
+OutGraph<-"Graphs/PointComparison.ps"
 postscript(OutGraph, family="Helvetica", width=5, height=3, pointsize=12)
 
 #quartz(h=3, w=5)

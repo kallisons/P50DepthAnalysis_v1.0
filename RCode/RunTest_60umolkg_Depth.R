@@ -1,30 +1,34 @@
-#Change working directory to P50DepthAnalysis_v1.0/RCode using the setwd() command or using the Misc menu.  
-#getwd() #shows the current working directory for the R gui.  
+#Change working directory to P50DepthAnalysis_v1.0/RCode using the setwd() command or using the Misc menu.
+#getwd() #shows the current working directory for the R gui.
 
-#The code in this file compares the output produced by P50Depth_geostats.sh with test files to make sure that the output is the same.  If the files have the same data (to 3 significant digits), then the tests are passed.  A passed test means that P50 depth analysis code worked!  If the tests fail, the code is not working.
+#The code in this file compares the output produced by P50Depth_maps.sh with test files to make sure that the output is the same.  If the files have the same data (to 3 significant digits), then the tests are passed.  A passed test means that P50 depth analysis code worked!  If the tests fail, the code is not working.
 
-decimalplaces <- function(x) {      
+library(ncdf)
+
+
+decimalplaces <- function(x) {
        hold<-strsplit(sub('0+$', '', as.character(x)), ".", fixed=TRUE)
        hold2<-ifelse(hold=="character(0)", list(c("","")), hold)
        df<-data.frame(matrix(unlist(hold2), nrow=length(hold2), byrow=T))
-       nchar(as.character(df[,2])) 
+       nchar(as.character(df[,2]))
    };
 
 
 TableCompare <- function(filename.new, filename.old) {
-
-	#filename.new<-paste("Results/Geostats_P50Depth/P50Depth_geostats.txt")
-	#filename.old<-paste("TestFiles/Geostats_P50Depth/P50Depth_geostats.txt")
-
-	new <- read.table(filename.new)
-	old <- read.table(filename.old)
 	
-	new <- new[,4:9]
-	old <- old[,4:9]
+	#filename.new<-paste("Results/60umolkg_Depth/Hypoxia_60umolkg_Depth.nc")
+	#filename.old<-paste("TestFiles/60umolkg_Depth/Hypoxia_60umolkg_Depth.nc")
+
+	new.nc <- open.ncdf(filename.new)
+	old.nc <- open.ncdf(filename.old)
+
+	new <- get.var.ncdf(new.nc, start=c(1,1,1), count=c(360,180,1))
+	old <- get.var.ncdf(old.nc, start=c(1,1,1), count=c(360,180,1))
+
 
 #--------------------------------------------------------
 # Round to 3 significant digits
-#--------------------------------------------------------	
+#--------------------------------------------------------
 	new <- signif(new, digits=4)
 	old <- signif(old, digits=4)
 
@@ -68,7 +72,7 @@ TableCompare <- function(filename.new, filename.old) {
 		finddiffs <- which(diffcols > 0)
 
 		#---------------------------------
-		# Find rounding errors 
+		# Find rounding errors
 		#---------------------------------
 
 		if (length(finddiffs > 0)) {
@@ -84,7 +88,7 @@ TableCompare <- function(filename.new, filename.old) {
 			bigdiffs <- subset(finddiffs, diffvals > thds)
 
 		#-----------------------------
-		# Print non-rounding errors 
+		# Print non-rounding errors
 		#-----------------------------
 			if (length(bigdiffs) > 0) {
 				for (j in 1:length(bigdiffs)) {
@@ -110,7 +114,9 @@ TableCompare <- function(filename.new, filename.old) {
 	cat(paste(filename.old, "\n", sep = ""))
 	cat("--------------\n")
 
+close.ncdf(new.nc)
+close.ncdf(old.nc)
+
 }
 
-TableCompare("Results/Geostats_P50Depth/P50Depth_geostats.txt", "TestFiles/Geostats_P50Depth/P50Depth_geostats.txt")
-
+TableCompare("Results/60umolkg_Depth/Hypoxia_60umolkg_Depth.nc", "TestFiles/60umolkg_Depth/Hypoxia_60umolkg_Depth.nc")

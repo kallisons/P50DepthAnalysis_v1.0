@@ -8,10 +8,7 @@ import matplotlib.pyplot as plt
 import matplotlib.mlab as mlab
 from matplotlib.colors import LogNorm
 
-Files = glob.glob('../Results/P50Depth_ABC_Differences/*.nc')
-#neworder=[1,0,2,3]
-#Files = [Files[k] for k in neworder]
-
+Files = glob.glob('Results/P50Depth_ABC_Differences/*.nc')
 
 file0 = Files[0]
 nc0 = Dataset(file0,'r')
@@ -54,7 +51,7 @@ depth3 = nc3.variables['MASK4'][:]
 depth3 = depth3.squeeze()
 
 
-fig, axes = plt.subplots(nrows=3, ncols=1, figsize=(4,6))
+fig, axes = plt.subplots(nrows=3, ncols=1, figsize=(5,6))
 plt.subplots_adjust(right=0.8)
 fig1 = plt.subplot(3, 1, 1)
 m = Basemap(llcrnrlon=0.,llcrnrlat=-80.,urcrnrlon=360.,urcrnrlat=80.,projection='cyl',lon_0=180)
@@ -65,14 +62,13 @@ m.drawcoastlines()
 m.fillcontinents(color='black')
 m.drawparallels(np.arange(-90.,120.,30.),labels=[1,0,0,0])
 m.drawmeridians(np.arange(0.,420.,60.),labels=[0,0,0,0])
-im1 = m.contourf(x,y,depth4, shading='flat', colors='grey')
-im2 = m.contourf(a,b,depth4, shading='flat', colors='grey')
-im3 = m.pcolor(x,y,depth0,shading='flat', cmap=plt.cm.jet_r, vmin=0, vmax=500)
+im1 = m.contourf(x,y,depth4, colors='grey')
+im2 = m.contourf(a,b,depth4, colors='grey')
+im3 = m.pcolor(x,y,depth0, cmap=plt.cm.jet_r, vmin=0, vmax=500)
 #im4 = m.pcolor(a,b,depth0,shading='flat', cmap=plt.cm.jet_r, vmin=0, vmax=500)
 fig1.set_title(r'O$_2$ affinity (A - C)')
 cbar_ax = fig.add_axes([0.82, 0.685, 0.03, 0.2])
 fig.colorbar(im3, cax=cbar_ax)
-plt.show()
 
 fig2 = plt.subplot(3, 1, 2)
 m = Basemap(llcrnrlon=0.,llcrnrlat=-80.,urcrnrlon=360.,urcrnrlat=80.,projection='cyl',lon_0=180)
@@ -83,14 +79,13 @@ m.drawcoastlines()
 m.fillcontinents(color='black')
 m.drawparallels(np.arange(-90.,120.,30.),labels=[1,0,0,0])
 m.drawmeridians(np.arange(0.,420.,60.),labels=[0,0,0,0])
-im1 = m.contourf(x,y,depth3, shading='flat', colors='grey')
-im2 = m.contourf(a,b,depth3, shading='flat', colors='grey')
-im3 = m.pcolor(x,y,depth2,shading='flat',cmap=plt.cm.jet_r, vmin=0, vmax=500)
+im1 = m.contourf(x,y,depth3, colors='grey')
+im2 = m.contourf(a,b,depth3, colors='grey')
+im3 = m.pcolor(x,y,depth2,cmap=plt.cm.jet_r, vmin=0, vmax=500)
 #im4 = m.pcolor(a,b,depth2,shading='flat',cmap=plt.cm.jet_r, vmin=0, vmax=500)
 fig2.set_title(r'$\Delta$H (A - B)')
 cbar_ax = fig.add_axes([0.82, 0.402, 0.03, 0.2])
 fig.colorbar(im3, cax=cbar_ax)
-plt.show()
 
 fig3 = plt.subplot(3, 1, 3)
 m = Basemap(llcrnrlon=0.,llcrnrlat=-80.,urcrnrlon=360.,urcrnrlat=80.,projection='cyl',lon_0=180)
@@ -101,15 +96,15 @@ m.drawcoastlines()
 m.fillcontinents(color='black')
 m.drawparallels(np.arange(-90.,120.,30.),labels=[1,0,0,0])
 m.drawmeridians(np.arange(0.,420.,60.),labels=[0,0,0,1])
-im1 = m.contourf(x,y,depth4, shading='flat', colors='grey')
-im2 = m.contourf(a,b,depth4, shading='flat', colors='grey')
-im3 = m.pcolor(x,y,depth1,shading='flat',cmap=plt.cm.jet_r, vmin=-100, vmax=100)
+im1 = m.contourf(x,y,depth4, colors='grey')
+im2 = m.contourf(a,b,depth4, colors='grey')
+im3 = m.pcolor(x,y,depth1, cmap=plt.cm.jet_r, vmin=-100, vmax=100)
 #im4 = m.pcolor(a,b,depth1,shading='flat',cmap=plt.cm.jet_r, vmin=-100, vmax=100)
 cbar_ax = fig.add_axes([0.82, 0.12, 0.03, 0.2])
 fig.colorbar(im3, cax=cbar_ax, ticks=(-100, -75,-50,-25,0,25,50,75,100))
 fig3.set_title(r'$\Delta$H and O$_2$ affinity (B - C)')
-plt.show()
 
-
-outfig = '../Graphs/P50Depth_ABC_Differences_Map.ps'
+outfig = 'Graphs/P50Depth_ABC_Differences_Map.ps'
 plt.savefig(outfig, dpi=300, bbox_inches=0)
+
+quit()

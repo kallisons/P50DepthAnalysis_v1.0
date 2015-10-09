@@ -52,52 +52,47 @@ The data in NetCDF format was obtained from the [NOAA National Centers for Envir
 -------------------------------
 #### Running the analysis code
 -------------------------------
-The analysis to calculate P<sub>50</sub> depth is run in NOAA Ferret using shell scripts in the ShellScripts folder. P<sub>50</sub> at 10 m depth and &Delta;H values to be analyzed can be added or changed at the top of the P50Depth_ABC.sh, P50Depth.sh, and P50Depth_geostats.sh files.  The output from the shell scripts will be put in the Results folder.  The commands to change the directory assume that the current directory is the P50DepthAnalysis_v1.0 folder.  P50Depth.sh produces 1.5 GB of results.  
+The analysis to calculate P<sub>50</sub> depth is run in NOAA Ferret using shell scripts in the ShellScripts folder. P<sub>50</sub> at 10 m depth and &Delta;H values to be analyzed can be added or changed at the top of the P50Depth_ABC.sh, P50Depth.sh, and P50Depth_geostats.sh files.  The output from the shell scripts will be put in the Results folder.  The commands assume that the current directory is the P50DepthAnalysis_v1.0 folder.  P50Depth.sh produces 1.5 GB of results.  
 
-Change the directory:  
+Commands to run shell scripts:  
 
-    cd ShellScripts/P50Depth_ABC
-
-Command to run shell script:  
-
-    sh P50Depth_ABC.sh
-
-Change the directory:  
-
-    cd ShellScripts/P50Depth
-
-Command to run shell script:  
-
-    sh P50Depth.sh
-
-Change the directory:  
-
-    cd ShellScripts/Geostats_P50Depth
+    sh ShellScripts/60umolkg_Depth/60umolkg_Depth.sh
+    sh ShellScripts/P50/P50.sh
+    sh ShellScripts/P50Depth_ABC/P50Depth_ABC.sh
+    sh ShellScripts/P50Depth_ABC_Differences/P50Depth_ABC_Differences.sh
 
 Command to run shell script (takes some time to run):
 
-    sh P50Depth_geostats.sh
+    sh ShellScripts/Geostats_P50Depth/P50Depth_geostats.sh
+
+Command to run shell script (takes some time to run and produces 1.5 GB of results):  
+
+    sh ShellScripts/P50Depth/P50Depth.sh
 
 -----------------------------
 #### Verifying the results
 -----------------------------
 Compare results generated using the commands above to a set of test files to make sure the results are the same. P50Depth.sh produces 1.5 GB of results so a set of test files is not included.  The analysis in P50Depth.sh is the same as the P50Depth_ABC.sh - the difference is that P50Depth.sh produces results for a wider range of P50 and &Delta;H parameters.
 
-Change the directory:  
-
-    cd ShellScripts/RCode
-
 Commands to run comparison tests:
 
-    Rscript RunTest_P50Depth_ABC.R
-    Rscript RunTest_P50Depth_geostats.R
-    Rscript RunTest_P50.R
+    Rscript RCode/RunTest_60umolkg_Depth.R
+    Rscript RCode/RunTest_P50.R
+    Rscript RCode/RunTest_P50Depth_ABC.R
+    Rscript RCode/RunTest_P50Depth_geostats.R
+
 
 -----------------------------
 #### Graphing the results
 -----------------------------
 
+Commands to graph the results:
 
+    Rscript RCode/Analysis_P50Depth_point.R
+    Rscript RCode/Analysis_P50Depth_transect.R
+    python PythonCode/P50Depth_ABC_Maps.py
+    python PythonCode/P50Depth_ABC_Differences_Maps.py
+    Rscript Analysis_P50Depth_parameters.R
 
 -----------------------------
 #### Acknowledgements

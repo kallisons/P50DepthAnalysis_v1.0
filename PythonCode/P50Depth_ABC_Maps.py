@@ -7,8 +7,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.mlab as mlab
 
-Files = glob.glob('../Results/P50Depth_ABC/*.nc')
-File2 = glob.glob('../Results/60umolkg_Depth/*.nc')
+Files = glob.glob('Results/P50Depth_ABC/*.nc')
+File2 = glob.glob('Results/60umolkg_Depth/*.nc')
 
 
 
@@ -30,7 +30,7 @@ m.drawcoastlines()
 m.fillcontinents(color='black', lake_color='0.5')
 m.drawparallels(np.arange(-90.,120.,30.),labels=[1,0,0,0])
 m.drawmeridians(np.arange(0.,420.,60.),labels=[0,0,0,0])
-im1 = m.pcolor(x,y,depth,shading='flat',cmap=plt.cm.jet_r, vmin=0, vmax=1100)
+im1 = m.pcolor(x,y,depth,cmap=plt.cm.jet_r, vmin=0, vmax=1100)
 #im2 = m.pcolor(a,b,depth,shading='flat',cmap=plt.cm.jet_r, vmin=0, vmax=1100)
 fig1.set_title(r'Low P50 and $-\Delta$H')
 
@@ -50,7 +50,7 @@ m.drawcoastlines()
 m.fillcontinents(color='black', lake_color='0.5')
 m.drawparallels(np.arange(-90.,120.,30.),labels=[0,0,0,0])
 m.drawmeridians(np.arange(0.,420.,60.),labels=[0,0,0,0])
-im1 = m.pcolor(x,y,depth,shading='flat',cmap=plt.cm.jet_r, vmin=0, vmax=1100)
+im1 = m.pcolor(x,y,depth,cmap=plt.cm.jet_r, vmin=0, vmax=1100)
 #im2 = m.pcolor(a,b,depth,shading='flat',cmap=plt.cm.jet_r, vmin=0, vmax=1100)
 fig2.set_title(r'Low P50 and $+\Delta$H')
 
@@ -70,7 +70,7 @@ m.drawcoastlines()
 m.fillcontinents(color='black', lake_color='0.5')
 m.drawparallels(np.arange(-90.,120.,30.),labels=[1,0,0,0])
 m.drawmeridians(np.arange(0.,420.,60.),labels=[0,0,0,1])
-im1 = m.pcolor(x,y,depth,shading='flat',cmap=plt.cm.jet_r, vmin=0, vmax=1100)
+im1 = m.pcolor(x,y,depth,cmap=plt.cm.jet_r, vmin=0, vmax=1100)
 #im2 = m.pcolor(a,b,depth,shading='flat',cmap=plt.cm.jet_r, vmin=0, vmax=1100)
 fig3.set_title(r'High P50 and $-\Delta$H')
 
@@ -90,14 +90,15 @@ m.drawcoastlines()
 m.fillcontinents(color='black', lake_color='0.5')
 m.drawparallels(np.arange(-90.,120.,30.),labels=[0,0,0,0])
 m.drawmeridians(np.arange(0.,420.,60.),labels=[0,0,0,1])
-im1 = m.pcolor(x,y,depth,shading='flat',cmap=plt.cm.jet_r, vmin=0, vmax=1100)
+im1 = m.pcolor(x,y,depth,cmap=plt.cm.jet_r, vmin=0, vmax=1100)
 #im2 = m.pcolor(a,b,depth,shading='flat',cmap=plt.cm.jet_r, vmin=0, vmax=1100)
 fig4.set_title(r'60 $\mu$mol kg$^{-1}$')
 cbar_ax = fig.add_axes([0.2, 0.1, 0.6, 0.03])
 fig.colorbar(im1, cax=cbar_ax, orientation="horizontal")
-plt.show()
+#plt.show()
 
-
-outfig = '../Graphs/P50Depth_ABC_Maps.ps'
+outfig = 'Graphs/P50Depth_ABC_Maps.ps'
 #fig.set_size_inches(7.5,10)
 plt.savefig(outfig, dpi=300, bbox_inches=0)
+
+quit()

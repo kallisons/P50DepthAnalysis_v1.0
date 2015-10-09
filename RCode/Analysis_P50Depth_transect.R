@@ -5,8 +5,8 @@
 
 require(ncdf)
 
-source('filled.contour/filled.contour.R', chdir = TRUE)
-source('filled.contour/filled.legend.R', chdir = TRUE)
+source('RCode/filled.contour/filled.contour.R', chdir = TRUE)
+source('RCode/filled.contour/filled.legend.R', chdir = TRUE)
 
 trans.lon<-220.5
 
@@ -15,7 +15,7 @@ trans.lon<-220.5
 #------------------------------
 
 #Filepath for the oxygen data
-pO2_filepath<-paste("../EnvironmentalData/Bianchi_po2_annual_1deg.nc")
+pO2_filepath<-paste("EnvironmentalData/Bianchi_po2_annual_1deg.nc")
 
 #Read in oxygen data
 nc.po2<-open.ncdf(pO2_filepath)
@@ -34,7 +34,7 @@ depths.po2<-depths.po2[order(depths.po2)]
 z.po2<-z.po2[,ncol(z.po2):1]
 
 #Filepath for the temperature data
-Temp_filepath<-paste("../EnvironmentalData/temperature_annual_1deg.nc")
+Temp_filepath<-paste("EnvironmentalData/temperature_annual_1deg.nc")
 
 #Read in temperature data
 nc.temp<-open.ncdf(Temp_filepath)
@@ -89,7 +89,7 @@ z.temp<-z.temp[,ncol(z.temp):1]
 #-----------------------
 #    P50 Depth
 #-----------------------
-folder<-paste("../Results/P50Depth_ABC/")
+folder<-paste("Results/P50Depth_ABC/")
 filenames<-list.files(path=folder, pattern=NULL, full.names=FALSE, recursive=FALSE)
 p50vals <- c()
 deltaHvals <- c()
@@ -128,7 +128,7 @@ close.ncdf(nc)
 #-----------------------
 #    60umol/kg Depth
 #-----------------------
-folder2<-paste("../Results/60umolkg_Depth/")
+folder2<-paste("Results/60umolkg_Depth/")
 filename2<-list.files(path=folder2, pattern=NULL, full.names=FALSE, recursive=FALSE)
 nc<-open.ncdf(paste(folder2, filename2[1], sep=""))
 dims<-nc$var[[1]]$ndim
@@ -145,7 +145,7 @@ close.ncdf(nc)
 #      Create Plot
 #------------------------------
 
-OutGraph<-paste("../Graphs/TransectComparison.ps")
+OutGraph<-paste("Graphs/TransectComparison.ps")
 postscript(OutGraph, family="Helvetica", width=3, height=7, pointsize=12)
 
 #quartz(h=7, w=3)

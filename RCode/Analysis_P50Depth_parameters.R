@@ -4,15 +4,15 @@
 require(ncdf)
 require(colorRamps)
 
-source('filled.contour/Filled.contour.R', chdir = TRUE)
-source('filled.contour/Filled.legend.R', chdir = TRUE) 
+source('RCode/filled.contour/Filled.contour.R', chdir = TRUE)
+source('RCode/filled.contour/Filled.legend.R', chdir = TRUE) 
 
 data<-read.table("p50_deltaH_data.txt", header=TRUE, sep="\t", stringsAsFactors=FALSE)
 data<-subset(data, data$Habitat=="pelagic")
 data.hb<-subset(data, data$Protein=="hb")
 data.hc<-subset(data, data$Protein=="hc")
 
-folder<-paste("../Results/P50Depth/")
+folder<-paste("Results/P50Depth/")
 filenames<-list.files(path=folder, pattern=NULL, full.names=FALSE, recursive=FALSE)
 
 dtable<-as.data.frame(matrix(NA, length(filenames), 8))
@@ -67,7 +67,7 @@ med.table[i,j]<-div2$med
 }
 }
 
-data1<-read.table("../Results/Geostats_P50Depth/P50Depth_geostats.txt")
+data1<-read.table("Results/Geostats_P50Depth/P50Depth_geostats.txt")
 
 data1<-data1[,4:9]
 colnames(data1)<-c("p50", "deltaH", "ocean_area", "p50_area", "min_p50depth", "max_p50depth") 
@@ -104,7 +104,7 @@ max_p50depth.table[i,j]<-div2$max_p50depth
 }
 }
 
-OutGraph<-paste("../Graphs/P50Depth_Parameters_area.ps", sep="")
+OutGraph<-paste("Graphs/P50Depth_Parameters_area.ps", sep="")
 postscript(OutGraph, family="Helvetica", width=4, height=4, pointsize=12)
 par(plt = c(0.15,0.75,0.25,0.85),   
     las = 1,                      # orientation of axis labels
@@ -125,7 +125,7 @@ points(data.hc$p50, data.hc$deltaH, pch=2, cex=0.65, col="black")
 dev.off()
 
 
-OutGraph<-paste("../Graphs/P50Depth_Parameters_min_med_iqr.ps", sep="")
+OutGraph<-paste("Graphs/P50Depth_Parameters_min_med_iqr.ps", sep="")
 postscript(OutGraph, family="Helvetica", width=3, height=7, pointsize=12)
 
 plot.new()
