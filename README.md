@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.31951.svg)](http://dx.doi.org/10.5281/zenodo.31951)
+
 ### P<sub>50</sub> Depth Analysis v1.0
 -----------------------------  
 The P<sub>50</sub> Depth Analysis v1.0 calculates blood-oxygen binding, which is mechanism determining hypoxia tolerance in the ocean.  Blood-oxygen binding is measured as the oxygen pressure in the blood at which whole blood is 50% oxygenated, called P<sub>50</sub>. A low P<sub>50</sub> means that respiratory pigments in the blood of an organism equilibrate to 100% oxygenation at lower oxygen pressures, and the organism is more hypoxia tolerant. Temperature alters hypoxia tolerance by shifting the P<sub>50</sub> of organisms. The effect of temperature is measured as the heat of oxygenation (&Delta;H) which is the amount of heat energy released (negative &Delta;H) or absorbed (positive &Delta;H) when oxygen binds to respiratory pigments. Marine organisms swim between warmer, well-oxygenated waters near the surface of the ocean and colder, less-oxygenated waters in the deeper ocean.
